@@ -124,6 +124,25 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+Widget _showBottomNav() {
+  return BottomNavigationBar(
+    items: [
+      BottomNavigationBarItem(
+        icon: Icon(Icons.dashboard),
+        label: 'Dashboard',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.account_circle),
+          label: 'Profile',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.logout),
+          label: 'Logout',
+        ),
+    ],
+    currentIndex: ,)
+}
 // class Home extends StatelessWidget {
 //   const Home({Key? key}) : super(key: key);
 

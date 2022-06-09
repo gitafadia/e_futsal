@@ -219,7 +219,7 @@ class _RegisterState extends State<Register> {
                       MaterialPageRoute(builder: (context) => Login()));
                 },
                 child: Text.rich(
-                  TextSpan(text: 'Already have account?', children: [
+                  TextSpan(text: 'Already have an account?', children: [
                     TextSpan(
                       text: 'Log In',
                       style: TextStyle(color: Color(0xff7CB342)),

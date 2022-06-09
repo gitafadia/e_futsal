@@ -8,91 +8,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class Logout extends StatefulWidget {
+  const Logout({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Logout> createState() => _LogoutState();
 }
 
-class _LoginState extends State<Login> {
-  var txtEditEmail = TextEditingController();
-
-  get http => null;
-
-  get Dialogs => null;
-
-  Widget inputEmail() {
-    return TextFormField(
-      validator: (email) => email != null && !EmailValidator.validate(email)
-          ? 'Masukkan Email yang Valid!'
-          : null,
-      cursorColor: Colors.white,
-      keyboardType: TextInputType.emailAddress,
-      autofocus: false,
-      controller: txtEditEmail,
-      onSaved: (String? val) {
-        txtEditEmail.text = val!;
-      },
-    );
-  }
-
-  void _validateInputs() {
-    var _formKey;
-    if (_formKey.currentState!.validate()) {
-      //If all data are correct then save data to out variables
-      _formKey.currentState!.save();
-
-      var txtEditPassword;
-      doLogin(txtEditEmail.text, txtEditPassword.text);
-    }
-  }
-
-  doLogin(email, password) async {
-    final GlobalKey<State> _keyLoader = GlobalKey<State>();
-    Dialogs.loading(context, _keyLoader, "Proses ...");
-
-    try {
-      final response = await http.post(
-          Uri.parse("https://api.sobatcoding.com/testing/login"),
-          headers: {'Content-Type': 'application/json; charset=UTF-8'},
-          body: jsonEncode({
-            "email": email,
-            "password": password,
-          }));
-
-      final output = jsonDecode(response.body);
-      if (response.statusCode == 200) {
-        Navigator.of(_keyLoader.currentContext!, rootNavigator: false).pop();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-            output['message'],
-            style: const TextStyle(fontSize: 16),
-          )),
-        );
-      } else {
-        Navigator.of(_keyLoader.currentContext!, rootNavigator: false).pop();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-            output.toString(),
-            style: const TextStyle(fontSize: 16),
-          )),
-        );
-      }
-    } catch (e) {
-      Navigator.of(_keyLoader.currentContext!, rootNavigator: false).pop();
-      Dialogs.popUp(context, '&e');
-    }
-  }
-
-  saveSession(String email) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    await pref.setString('email', email);
-    await pref.setBool('is_login', true);
-  }
-
+class _LogoutState extends State<Logout> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -106,7 +29,7 @@ class _LoginState extends State<Login> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               HeaderTop(
-                text: 'LOGIN',
+                text: 'LOGOUT',
               ),
               SizedBox(
                 height: 30.0,
